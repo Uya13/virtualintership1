@@ -91,13 +91,11 @@ class SprActivitiesTypes(models.Model):
     hiking = 'HK'
     skiing = 'SK'
     biking = 'BK'
-    mountain_hiking = 'MH'
     TYPE = [
         (mountaining, 'Горный'),
         (hiking, 'Пеший'),
         (skiing, 'Лыжный'),
         (biking, 'Велосипедный'),
-        (mountain_hiking, 'Горно-пеший')
     ]
 
     title = models.CharField(max_length=128, choices=TYPE, verbose_name='Тип похода')
