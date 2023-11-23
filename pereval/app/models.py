@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.cache import cache
 
 
 class Users(models.Model):
@@ -85,10 +84,6 @@ class Images(models.Model):
 class PerevalImages(models.Model):
     pereval_id = models.ForeignKey(Perevals, on_delete=models.CASCADE)
     image_id = models.ForeignKey(Images, on_delete=models.CASCADE)
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        cache.delete(f'image-{self.pk}')
 
 
 class SprActivitiesTypes(models.Model):
