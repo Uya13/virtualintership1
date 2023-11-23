@@ -6,7 +6,7 @@ class UsersSerializer(serializers.ModelSerializer):
 
     def save(self, **kwargs):
         self.is_valid()
-        user = Users.objects.filter(email=self.validated_data.get['email'])
+        user = Users.objects.filter(email=self.validated_data.get('email'))
         if user.exists():
             return user.first()
         else:
