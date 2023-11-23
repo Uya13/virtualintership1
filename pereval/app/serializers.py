@@ -66,4 +66,4 @@ class PerevalsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Perevals
-        fields = ['beautyTitle', 'title', 'connect', 'status', 'add_time', 'level_id', 'coord_id', 'user_id']
+        fields = ['beautyTitle', 'title', 'connect', 'status', 'add_time', 'level_id', 'coord_id', 'user_id', 'images']
