@@ -57,13 +57,13 @@ class PerevalsSerializer(serializers.ModelSerializer):
 
         coord_data = validated_data.pop('coord_id', None)
         if coord_data:
-            coord = Coords.objects.get_or_create(coord_data)[0]
+            coord = Coords.objects.get_or_create(**coord_data)[0]
             validated_data['coord_id'] = coord
         instance.coord_id = validated_data.get("coord_id", instance.coord_id)
 
         level_data = validated_data.pop('level_id', None)
         if level_data:
-            level = Level.objects.get_or_create(level_data)[0]
+            level = Level.objects.get_or_create(**level_data)[0]
             validated_data['level_id'] = level
         instance.level_id = validated_data.get("level_id", instance.level_id)
 
