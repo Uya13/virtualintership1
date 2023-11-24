@@ -45,7 +45,30 @@ class PerevalsSerializer(serializers.ModelSerializer):
     user_id = UsersSerializer()
     coord_id = CoordsSerializer()
     level_id = LevelSerializer(allow_null=True)
-    images = ImagesSerializer(many=True)
+    images = ImagesSerializer(many=True, allow_null=True)
+
+    def update(self, instance, validated_data):
+        instance.beautyTitle = validated_data.get("beautyTitle", instance.beautyTitle)
+        instance.title = validated_data.get("title", instance.title)
+        instance.other_titles = validated_data.get("other_titles", instance.other_titles)
+        instance.connect = validated_data.get("connect", instance.connect)
+        instance.status = validated_data.get("status", instance.status)
+        instance.add_time = validated_data.get("add_time", instance.add_time)
+
+        coord_data = validated_data.pop('coord_id', None)
+        if coord_data:
+            coord = Coords.objects.get_or_create(coord_data)[0]
+            validated_data['coord_id'] = coord
+        instance.coord_id = validated_data.get("coord_id", instance.coord_id)
+
+        level_data = validated_data.pop('level_id', None)
+        if level_data:
+            level = Level.objects.get_or_create(level_data)[0]
+            validated_data['level_id'] = level
+        instance.level_id = validated_data.get("level_id", instance.level_id)
+
+        instance.save()
+        return instance
 
     def create(self, validated_data):
         user_data = validated_data.pop('user_id', None)

@@ -2,9 +2,9 @@ from django.db import models
 
 
 class Users(models.Model):
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     full_name = models.CharField(max_length=128, verbose_name='Полное имя')
-    phone = models.IntegerField(unique=True, verbose_name='Телефон')
+    phone = models.IntegerField(verbose_name='Телефон')
 
 
 class Coords(models.Model):
