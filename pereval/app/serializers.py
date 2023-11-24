@@ -47,6 +47,22 @@ class PerevalsSerializer(serializers.ModelSerializer):
     level_id = LevelSerializer(allow_null=True)
     images = ImagesSerializer(many=True)
 
+    def create(self, validated_data):
+        user_data = validated_data.pop('user_id', None)
+        coord_data = validated_data.pop('coord_id', None)
+        level_data = validated_data.pop('level_id', None)
+
+        if user_data:
+            user = Users.objects.get_or_create(**user_data)[0]
+            validated_data['user_id'] = user
+        if coord_data:
+            coord = Coords.objects.get_or_create(**coord_data)[0]
+            validated_data['coord_id'] = coord
+        if level_data:
+            level = Level.objects.get_or_create(**level_data)[0]
+            validated_data['level_id'] = level
+        return Perevals.objects.create(**validated_data)
+
     def validate(self, data):
         if self.instance is not None:
             instance_user = self.instance.user_id
