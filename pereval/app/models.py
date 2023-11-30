@@ -86,16 +86,3 @@ class PerevalImages(models.Model):
     image_id = models.ForeignKey(Images, on_delete=models.CASCADE)
 
 
-class SprActivitiesTypes(models.Model):
-    mountaining = 'MN'
-    hiking = 'HK'
-    skiing = 'SK'
-    biking = 'BK'
-    TYPE = [
-        (mountaining, 'Горный'),
-        (hiking, 'Пеший'),
-        (skiing, 'Лыжный'),
-        (biking, 'Велосипедный'),
-    ]
-
-    title = models.CharField(max_length=128, choices=TYPE, verbose_name='Тип похода')
